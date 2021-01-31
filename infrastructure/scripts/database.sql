@@ -1,0 +1,37 @@
+CREATE DATABASE ChallengeAppointments
+GO
+
+CREATE TABLE dbo.[User]
+(
+    [Id] UNIQUEIDENTIFIER PRIMARY KEY NOT NULL,
+    [Name] VARCHAR (50) NOT NULL,
+    [Cpf] VARCHAR (11) NOT NULL,
+    [Email] VARCHAR (100) NOT NULL,
+    [BirthDate] DATETIME NOT NULL,
+    [CreatedAt] DATETIME NOT NULL,
+    [UpdatedAt] DATETIME NULL,
+    [Active] BIT NOT NULL
+);
+GO
+
+CREATE UNIQUE INDEX IX_USER_EMAIL 
+ON dbo.[User](Email);
+
+CREATE UNIQUE INDEX IX_USER_CPF 
+ON dbo.[User](CPF);
+
+CREATE TABLE dbo.[Appointment]
+(
+    [Id] UNIQUEIDENTIFIER PRIMARY KEY NOT NULL,
+    [UserId] UNIQUEIDENTIFIER NOT NULL,
+    [MessageId] INT NOT NULL,
+    [SchedulingStart] DATETIME NOT NULL,
+    [SchedulingEnd] DATETIME NOT NULL,
+    [ExamName] VARCHAR (100) NOT NULL,
+    [ExamValue] DECIMAL (18,2) NOT NULL,
+    [CreatedAt] DATETIME NOT NULL,
+    [UpdatedAt] DATETIME NULL,
+    [Active] BIT NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES dbo.[User](Id)
+);
+GO
