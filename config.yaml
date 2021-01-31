@@ -1,7 +1,7 @@
 environment: "Development"
 
 api:
-  port: 3000
+  port: 5000
   connectionString: "sqlserver://sa:@stefany@1994@localhost:1433?database=ChallengeAppointments"
 
 notifier:
