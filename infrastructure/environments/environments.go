@@ -12,6 +12,7 @@ var (
 	SqlConnectionString        = ""
 	ServiceBusConnectionString = ""
 	QueueName                  = ""
+	ExamsBaseUrl               = ""
 )
 
 func NewConfig() {
@@ -29,6 +30,7 @@ func NewConfig() {
 	Environment = viper.GetString("environment")
 	Port = viper.GetInt("api.port")
 	SqlConnectionString = viper.GetString("api.connectionString")
+	ExamsBaseUrl = viper.GetString("api.examsBaseUrl")
 	ServiceBusConnectionString = viper.GetString("notifier.serviceBus.connectionString")
 	QueueName = viper.GetString("notifier.serviceBus.queueName")
 }

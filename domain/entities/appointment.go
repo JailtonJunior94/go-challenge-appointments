@@ -1,6 +1,8 @@
 package entities
 
-import "time"
+import (
+	"time"
+)
 
 type Appointment struct {
 	Entity
@@ -9,5 +11,5 @@ type Appointment struct {
 	SchedulingStart time.Time `db:"SchedulingStart"`
 	SchedulingEnd   time.Time `db:"SchedulingEnd"`
 	ExamName        string    `db:"ExamName"`
-	ExamValue       string    `db:"ExamValue"`
+	ExamValue       float64   `db:"ExamValue"`
 }

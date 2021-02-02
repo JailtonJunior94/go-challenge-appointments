@@ -8,6 +8,7 @@ func RegisterRoutes(app *fiber.App) {
 	v1.Get("/me", me)
 
 	RegisterUserRouter(v1)
+	RegisterExamRouter(v1)
 	RegisterAppointmentRouter(v1)
 }
 
