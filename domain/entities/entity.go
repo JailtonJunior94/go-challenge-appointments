@@ -8,14 +8,16 @@ import (
 )
 
 type Entity struct {
-	ID        uuid.UUID    `db:"Id"`
+	ID        string       `db:"Id"`
 	CreatedAt time.Time    `db:"CreatedAt"`
 	UpdatedAt sql.NullTime `db:"UpdatedAt"`
 	Active    bool         `db:"Active"`
 }
 
-func (e *Entity) NewUuid() {
-	e.ID = uuid.NewV4()
+func (e *Entity) NewEntity() {
+	e.ID = uuid.NewV4().String()
+	e.CreatedAt = time.Now()
+	e.Active = true
 }
 
 func (e *Entity) ChangeUpdatedAt() {

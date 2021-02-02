@@ -16,6 +16,7 @@ func (u *User) NewUser(name, cpf, email string, birthDate time.Time) {
 	u.Cpf = cpf
 	u.Email = email
 	u.BirthDate = birthDate
+	u.Entity.NewEntity()
 }
 
 func (u *User) Update(name string, birthDate time.Time) {
