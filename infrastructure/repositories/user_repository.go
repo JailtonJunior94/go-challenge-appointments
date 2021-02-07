@@ -9,6 +9,7 @@ import (
 
 type IUserRepository interface {
 	Add(u *entities.User) (user *entities.User, err error)
+	Get() (users []entities.User, err error)
 }
 
 type UserRepository struct {
@@ -50,4 +51,24 @@ func (r UserRepository) Add(u *entities.User) (user *entities.User, err error) {
 	}
 
 	return u, nil
+}
+
+func (r UserRepository) Get() (users []entities.User, err error) {
+	query := `SELECT
+				CAST([Id] AS CHAR(36)) Id,
+				[Name],
+				[Cpf],
+				[Email],
+				[BirthDate],
+				[CreatedAt],
+				[UpdatedAt],
+				[Active]
+			FROM
+				[ChallengeAppointments].[dbo].[User]`
+
+	if err := r.Db.Select(&users, query); err != nil {
+		return nil, err
+	}
+
+	return users, nil
 }

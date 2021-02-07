@@ -10,6 +10,7 @@ import (
 
 type IUserHandler interface {
 	CreateUser(c *fiber.Ctx) error
+	GetUsers(c *fiber.Ctx) error
 }
 
 type UserHandler struct {
@@ -48,4 +49,13 @@ func (h UserHandler) CreateUser(c *fiber.Ctx) error {
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(response)
+}
+
+func (h UserHandler) GetUsers(c *fiber.Ctx) error {
+	users, err := h.UserRepository.Get()
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Ocorreu um erro inesperado"})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(users)
 }

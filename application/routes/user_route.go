@@ -19,4 +19,5 @@ func RegisterUserRouter(router fiber.Router) {
 	h := handlers.NewUserHandler(r)
 
 	router.Post("/users", h.CreateUser)
+	router.Get("/users", h.GetUsers)
 }
