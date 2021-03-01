@@ -1,0 +1,161 @@
+definitions:
+  dtos.AppointmentResponse:
+    properties:
+      active:
+        type: boolean
+      examName:
+        type: string
+      examValue:
+        type: number
+      id:
+        type: string
+      schedulingEnd:
+        type: string
+      schedulingStart:
+        type: string
+    type: object
+  dtos.UserRequest:
+    properties:
+      birthDate:
+        type: string
+      cpf:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+    type: object
+  dtos.UserResponse:
+    properties:
+      active:
+        type: boolean
+      appointments:
+        items:
+          $ref: '#/definitions/dtos.AppointmentResponse'
+        type: array
+      birthDate:
+        type: string
+      cpf:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  routes.HttpError:
+    properties:
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+  routes.Me:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/me:
+    get:
+      consumes:
+      - application/json
+      description: Me
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/routes.Me'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HttpError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routes.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routes.HttpError'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/routes.HttpError'
+      summary: Me
+      tags:
+      - Me
+  /api/v1/users:
+    get:
+      consumes:
+      - application/json
+      description: Users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+      summary: Users
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Users
+      parameters:
+      - description: UserRequest
+        in: body
+        name: UserRequest
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/dtos.UserResponse'
+      summary: Users
+      tags:
+      - Users
+swagger: "2.0"

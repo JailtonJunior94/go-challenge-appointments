@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"github.com/gofiber/fiber/v2"
-
 	"github.com/jailtonjunior94/go-challenge-appointments/domain/dtos"
 	"github.com/jailtonjunior94/go-challenge-appointments/domain/entities"
 	"github.com/jailtonjunior94/go-challenge-appointments/infrastructure/repositories"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 type IUserHandler interface {
@@ -21,7 +21,19 @@ func NewUserHandler(repository repositories.IUserRepository) IUserHandler {
 	return &UserHandler{UserRepository: repository}
 }
 
-func (h UserHandler) CreateUser(c *fiber.Ctx) error {
+// Users godoc
+// @Summary Users
+// @Description Users
+// @Accept  json
+// @Produce json
+// @Tags Users
+// @Param UserRequest body dtos.UserRequest true "UserRequest"
+// @Success 200 {object} dtos.UserResponse
+// @Failure 400,404 {object} dtos.UserResponse
+// @Failure 500 {object} dtos.UserResponse
+// @Failure default {object} dtos.UserResponse
+// @Router /api/v1/users [post]
+func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	request := new(dtos.UserRequest)
 	if err := c.BodyParser(request); err != nil {
 		return c.Status(fiber.StatusUnprocessableEntity).JSON(fiber.Map{"message": "Unprocessable Entity"})
@@ -51,7 +63,18 @@ func (h UserHandler) CreateUser(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusCreated).JSON(response)
 }
 
-func (h UserHandler) GetUsers(c *fiber.Ctx) error {
+// Users godoc
+// @Summary Users
+// @Description Users
+// @Accept  json
+// @Produce  json
+// @Tags Users
+// @Success 200 {object} dtos.UserResponse
+// @Failure 400,404 {object} dtos.UserResponse
+// @Failure 500 {object} dtos.UserResponse
+// @Failure default {object} dtos.UserResponse
+// @Router /api/v1/users [get]
+func (h *UserHandler) GetUsers(c *fiber.Ctx) error {
 	users, err := h.UserRepository.Get()
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Ocorreu um erro inesperado"})
