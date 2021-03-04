@@ -1,0 +1,36 @@
+version: "3"
+services:
+  mssql:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    ports:
+      - "1433:1433"
+    networks:
+      - challenge-network
+    environment:
+      SA_PASSWORD: "@Antony@2020"
+      ACCEPT_EULA: "Y"
+  api:
+    build:
+      context: .
+      dockerfile: "presentation/api/Dockerfile"
+    ports:
+      - "5000:5000"
+    networks:
+      - challenge-network
+    environment:
+      ENVIRONMENT: "Docker"
+    depends_on:
+      - mssql
+  # notifier:
+  #   build: ./presentation/notifier
+  #   depends_on:
+  #     - mssql
+  #     - api
+
+volumes:
+  api:
+  mssql:   
+
+networks:
+  challenge-network:
+    driver: bridge

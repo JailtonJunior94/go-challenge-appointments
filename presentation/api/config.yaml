@@ -1,0 +1,6 @@
+environment: "Development"
+
+api:
+  port: 5000
+  connectionString: "sqlserver://sa:@Antony@2020@mssql?database=ChallengeAppointments"
+  examsBaseUrl: "http://www.mocky.io/v2/5d681ede33000054e7e65c3f"

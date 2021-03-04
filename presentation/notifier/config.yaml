@@ -1,0 +1,6 @@
+environment: "Development"
+
+notifier:
+  serviceBus:
+    connectionString: ""
+    queueName: ""

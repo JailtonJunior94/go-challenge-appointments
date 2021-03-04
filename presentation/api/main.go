@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	environments.NewConfig()
+	environments.NewApiConfig()
 
 	app := fiber.New()
 
